@@ -1,13 +1,14 @@
-import js from '@eslint/js';
-import simpleImportSort from 'eslint-plugin-simple-import-sort';
-import unusedImports from 'eslint-plugin-unused-imports';
+import eslint from '@eslint/js';
+// import pluginImport from 'eslint-plugin-import';
+import pluginSimpleImportSort from 'eslint-plugin-simple-import-sort';
+import pluginUnusedImports from 'eslint-plugin-unused-imports';
 import globals from 'globals';
 import tseslint from 'typescript-eslint';
 
 const ECMA_VERSION = 2021,
-  JAVASCRIPT_FILES = ['*.js', '*.jsx', '*.cjs', '*.mjs'],
+  JAVASCRIPT_FILES = ['*.cjs', '*.js', '*.jsx', '*.mjs'],
   TEST_FILES = ['*.test.js', '*.test.jsx', '*.test.ts', '*.test.tsx', 'test/**', '__tests__/**'],
-  TYPESCRIPT_FILES = ['*.ts', '*.tsx', '*.mts'],
+  TYPESCRIPT_FILES = ['*.cts', '*.mts', '*.ts', '*.tsx'],
   YAML_FILES = ['*.yml', '*.yaml'];
 
 export default tseslint.config([
@@ -44,22 +45,24 @@ export default tseslint.config([
       },
     },
   },
-  js.configs.recommended,
+  eslint.configs.recommended,
   tseslint.configs.recommended,
+  // {
+  //   extends: [pluginImport.configs.recommended],
+  //   plugins: {
+  //     import: pluginImport,
+  //   },
+  // },
+  // GLOBAL RULES
   {
+    plugins: {
+      'simple-import-sort': pluginSimpleImportSort,
+      'unused-imports': pluginUnusedImports,
+    },
     rules: {
       curly: ['error', 'all'],
-      'sort-imports': 'off',
-      '@typescript-eslint/no-explicit-any': 'off',
-    },
-  },
-  {
-    files: [...JAVASCRIPT_FILES, ...TYPESCRIPT_FILES],
-    plugins: {
-      'simple-import-sort': simpleImportSort,
-      'unused-imports': unusedImports,
-    },
-    rules: {
+      'no-label-var': 'error',
+      'no-undef-init': 'warn',
       'no-restricted-imports': [
         'error',
         {
@@ -82,7 +85,73 @@ export default tseslint.config([
           ],
         },
       ],
+
       'simple-import-sort/imports': 'error',
+
+      'sort-imports': 'off',
+
+      'unused-imports/no-unused-imports': 'error',
+
+      // TYPESCRIPT RULE DISABLES
+      '@typescript-eslint/no-explicit-any': 'off',
+      '@typescript-eslint/no-unsafe-argument': 'off',
+      '@typescript-eslint/no-unsafe-assignment': 'off',
+      '@typescript-eslint/no-unsafe-call': 'off',
+      '@typescript-eslint/no-unsafe-member-access': 'off',
+      '@typescript-eslint/no-unsafe-return': 'off',
+      '@typescript-eslint/restrict-template-expressions': 'off',
+      '@typescript-eslint/no-unsafe-declaration-merging': 'off',
+
+      // TODO: All rules below should be set to their defaults
+      // when we're able to make the appropriate changes.
+      '@typescript-eslint/no-duplicate-type-constituents': 'off',
+    },
+  },
+  // JAVASCRIPT RULES
+  {
+    files: JAVASCRIPT_FILES,
+    rules: {
+      'no-unused-vars': [
+        'error',
+        {
+          args: 'after-used',
+          argsIgnorePattern: '^_',
+          ignoreRestSiblings: true,
+          vars: 'all',
+          varsIgnorePattern: '^_',
+        },
+      ],
+    },
+  },
+  // TYPESCRIPT RULES
+  {
+    files: TYPESCRIPT_FILES,
+    rules: {
+      'no-unused-vars': 'off',
+      // TODO: All rules below should be set to their defaults
+      // when we're able to make the appropriate changes.
+      '@typescript-eslint/await-thenable': 'warn',
+      '@typescript-eslint/no-misused-promises': 'warn',
+      '@typescript-eslint/no-floating-promises': [
+        'warn',
+        {
+          ignoreVoid: true,
+        },
+      ],
+      '@typescript-eslint/no-redundant-type-constituents': 'warn',
+      '@typescript-eslint/no-unsafe-enum-comparison': 'warn',
+      '@typescript-eslint/no-unnecessary-type-assertion': 'warn',
+      '@typescript-eslint/require-await': 'warn',
+      '@typescript-eslint/no-unused-vars': [
+        'error',
+        {
+          args: 'after-used',
+          argsIgnorePattern: '^_',
+          ignoreRestSiblings: true,
+          vars: 'all',
+          varsIgnorePattern: '^_',
+        },
+      ],
     },
   },
 ]);

@@ -1,7 +1,5 @@
 module.exports = {
   rules: {
-    'no-label-var': 'error',
-    'no-undef-init': 'warn',
     'no-unused-vars': [
       'error',
       {
@@ -12,6 +10,5 @@ module.exports = {
         varsIgnorePattern: '^_',
       },
     ],
-    'unused-imports/no-unused-imports': 'error',
   },
 };
