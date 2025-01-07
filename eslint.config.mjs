@@ -1,15 +1,15 @@
 import eslint from '@eslint/js';
-// import pluginImport from 'eslint-plugin-import';
+import pluginImport from 'eslint-plugin-import';
 import pluginSimpleImportSort from 'eslint-plugin-simple-import-sort';
 import pluginUnusedImports from 'eslint-plugin-unused-imports';
 import globals from 'globals';
 import tseslint from 'typescript-eslint';
 
 const ECMA_VERSION = 2021,
-  JAVASCRIPT_FILES = ['*.cjs', '*.js', '*.jsx', '*.mjs'],
-  TEST_FILES = ['*.test.js', '*.test.jsx', '*.test.ts', '*.test.tsx', 'test/**', '__tests__/**'],
-  TYPESCRIPT_FILES = ['*.cts', '*.mts', '*.ts', '*.tsx'],
-  YAML_FILES = ['*.yml', '*.yaml'];
+  JAVASCRIPT_FILES = ['**/*.cjs', '**/*.js', '**/*.jsx', '**/*.mjs'],
+  TEST_FILES = ['**/*.test.js', '**/*.test.jsx', '**/*.test.ts', '**/*.test.tsx', '**/test/**', '**/__tests__/**'],
+  TYPESCRIPT_FILES = ['**/*.cts', '**/*.mts', '**/*.ts', '**/*.tsx'],
+  YAML_FILES = ['**/*.yml', '**/*.yaml'];
 
 export default tseslint.config([
   {
@@ -38,24 +38,30 @@ export default tseslint.config([
   {
     languageOptions: {
       ecmaVersion: ECMA_VERSION,
-      sourceType: 'module',
       globals: {
         ...globals.browser,
         ...globals.node,
       },
+      sourceType: 'module',
+    },
+  },
+  {
+    languageOptions: {
+      parserOptions: {
+        projectService: true,
+        tsconfigRootDir: import.meta.dirname,
+      },
     },
   },
   eslint.configs.recommended,
-  tseslint.configs.recommended,
-  // {
-  //   extends: [pluginImport.configs.recommended],
-  //   plugins: {
-  //     import: pluginImport,
-  //   },
-  // },
+  tseslint.configs.recommendedTypeChecked,
+  {
+    // extends: [pluginImport.configs.recommended],
+  },
   // GLOBAL RULES
   {
     plugins: {
+      import: pluginImport,
       'simple-import-sort': pluginSimpleImportSort,
       'unused-imports': pluginUnusedImports,
     },
@@ -91,6 +97,64 @@ export default tseslint.config([
       'sort-imports': 'off',
 
       'unused-imports/no-unused-imports': 'error',
+
+      // TODO: All rules below should be set to their defaults
+      // when we're able to make the appropriate changes.
+      '@typescript-eslint/await-thenable': 'warn',
+      '@typescript-eslint/no-misused-promises': 'warn',
+      '@typescript-eslint/no-floating-promises': [
+        'warn',
+        {
+          ignoreVoid: true,
+        },
+      ],
+      '@typescript-eslint/no-redundant-type-constituents': 'warn',
+      '@typescript-eslint/no-unsafe-enum-comparison': 'warn',
+      '@typescript-eslint/no-unnecessary-type-assertion': 'warn',
+      '@typescript-eslint/require-await': 'warn',
+      '@typescript-eslint/no-unused-vars': [
+        'error',
+        {
+          args: 'after-used',
+          argsIgnorePattern: '^_',
+          ignoreRestSiblings: true,
+          vars: 'all',
+          varsIgnorePattern: '^_',
+        },
+      ],
+      '@typescript-eslint/ban-ts-comment': [
+        `warn`,
+        {
+          'ts-ignore': 'allow-with-description',
+          'ts-expect-error': 'allow-with-description',
+          'ts-check': 'allow-with-description',
+        },
+      ],
+      '@typescript-eslint/consistent-type-imports': [
+        'error',
+        {
+          prefer: 'type-imports',
+          disallowTypeAnnotations: true,
+          fixStyle: 'separate-type-imports',
+        },
+      ],
+      '@typescript-eslint/no-floating-promises': [
+        'error',
+        {
+          ignoreVoid: true,
+        },
+      ],
+      '@typescript-eslint/no-non-null-assertion': 'warn',
+      '@typescript-eslint/no-unused-vars': [
+        'error',
+        {
+          args: 'after-used',
+          argsIgnorePattern: '^_',
+          ignoreRestSiblings: true,
+          vars: 'all',
+          varsIgnorePattern: '^_',
+        },
+      ],
 
       // TYPESCRIPT RULE DISABLES
       '@typescript-eslint/no-explicit-any': 'off',
@@ -128,30 +192,6 @@ export default tseslint.config([
     files: TYPESCRIPT_FILES,
     rules: {
       'no-unused-vars': 'off',
-      // TODO: All rules below should be set to their defaults
-      // when we're able to make the appropriate changes.
-      '@typescript-eslint/await-thenable': 'warn',
-      '@typescript-eslint/no-misused-promises': 'warn',
-      '@typescript-eslint/no-floating-promises': [
-        'warn',
-        {
-          ignoreVoid: true,
-        },
-      ],
-      '@typescript-eslint/no-redundant-type-constituents': 'warn',
-      '@typescript-eslint/no-unsafe-enum-comparison': 'warn',
-      '@typescript-eslint/no-unnecessary-type-assertion': 'warn',
-      '@typescript-eslint/require-await': 'warn',
-      '@typescript-eslint/no-unused-vars': [
-        'error',
-        {
-          args: 'after-used',
-          argsIgnorePattern: '^_',
-          ignoreRestSiblings: true,
-          vars: 'all',
-          varsIgnorePattern: '^_',
-        },
-      ],
     },
   },
 ]);

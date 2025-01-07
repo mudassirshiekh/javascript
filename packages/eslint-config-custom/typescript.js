@@ -16,14 +16,6 @@ if (!fs.existsSync(project)) {
 }
 
 const disabledRules = {
-  '@typescript-eslint/no-unsafe-argument': 'off',
-  '@typescript-eslint/no-unsafe-assignment': 'off',
-  '@typescript-eslint/no-unsafe-call': 'off',
-  '@typescript-eslint/no-unsafe-member-access': 'off',
-  '@typescript-eslint/no-unsafe-return': 'off',
-  '@typescript-eslint/restrict-template-expressions': 'off',
-  '@typescript-eslint/no-unsafe-declaration-merging': 'off',
-
   // TODO: All rules below should be set to their defaults
   // when we're able to make the appropriate changes.
   '@typescript-eslint/await-thenable': 'warn',
@@ -62,30 +54,7 @@ module.exports = {
         'plugin:@typescript-eslint/recommended-requiring-type-checking',
       ],
       rules: {
-        '@typescript-eslint/ban-ts-comment': [
-          `warn`,
-          {
-            'ts-ignore': 'allow-with-description',
-            'ts-expect-error': 'allow-with-description',
-            'ts-check': 'allow-with-description',
-          },
-        ],
-        '@typescript-eslint/consistent-type-imports': [
-          'error',
-          {
-            prefer: 'type-imports',
-            disallowTypeAnnotations: true,
-            fixStyle: 'separate-type-imports',
-          },
-        ],
-        '@typescript-eslint/no-floating-promises': [
-          'error',
-          {
-            ignoreVoid: true,
-          },
-        ],
-        '@typescript-eslint/no-non-null-assertion': 'warn',
-        '@typescript-eslint/no-unused-vars': noUnusedVarsConfig,
+  
         ...disabledRules,
       },
     },
