@@ -1,4 +1,5 @@
 import eslint from '@eslint/js';
+import pluginTurbo from 'eslint-config-turbo/flat';
 import pluginImport from 'eslint-plugin-import';
 import pluginSimpleImportSort from 'eslint-plugin-simple-import-sort';
 import pluginUnusedImports from 'eslint-plugin-unused-imports';
@@ -33,6 +34,8 @@ export default tseslint.config([
       'playground',
       'pnpm-lock.json',
       'vitest.workspace.mjs',
+      // @clerk/astro
+      'packages/astro/src/astro-components/**/*.ts',
     ],
   },
   {
@@ -42,19 +45,16 @@ export default tseslint.config([
         ...globals.browser,
         ...globals.node,
       },
-      sourceType: 'module',
-    },
-  },
-  {
-    languageOptions: {
       parserOptions: {
         projectService: true,
         tsconfigRootDir: import.meta.dirname,
       },
+      sourceType: 'module',
     },
   },
   eslint.configs.recommended,
   tseslint.configs.recommendedTypeChecked,
+  ...pluginTurbo,
   {
     // extends: [pluginImport.configs.recommended],
   },
@@ -193,5 +193,9 @@ export default tseslint.config([
     rules: {
       'no-unused-vars': 'off',
     },
+  },
+  {
+    files: ['packages/astro/'],
+    rules: {},
   },
 ]);
