@@ -49,6 +49,7 @@
     "bundlewatch": "pnpm dlx bundlewatch --config bundlewatch.config.json",
     "dev": "tsup --watch",
     "dev:theme-builder": "concurrently \"pnpm dev\" \"cd theme-builder && pnpm dev\"",
+    "lint": "eslint src",
     "test": "vitest"
   },
   "dependencies": {
