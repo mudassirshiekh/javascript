@@ -17,7 +17,7 @@ export async function loadScript(src = '', opts: LoadScriptOptions): Promise<HTM
   const load = () => {
     return new Promise<HTMLScriptElement>((resolve, reject) => {
       if (!src) {
-        reject(NO_SRC_ERROR);
+        reject(new Error(NO_SRC_ERROR));
       }
 
       if (!document || !document.body) {
