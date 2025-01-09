@@ -19,7 +19,7 @@ const createWebWorker = (source: string, opts: ConstructorParameters<typeof Work
     const blob = new Blob([source], { type: 'application/javascript; charset=utf-8' });
     const workerScript = globalThis.URL.createObjectURL(blob);
     return new Worker(workerScript, opts);
-  } catch (e) {
+  } catch {
     console.warn('Clerk: Cannot create worker from blob. Consider adding worker-src blob:; to your CSP');
     return null;
   }

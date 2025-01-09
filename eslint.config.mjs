@@ -30,12 +30,12 @@ export default tseslint.config([
       'commitlint.config.ts',
       'packages/*/dist/**',
       'packages/*/examples',
-      'packages/eslint-config-custom/**',
       'playground',
       'pnpm-lock.json',
       'vitest.workspace.mjs',
-      // @clerk/astro
+      // package specific ignores
       'packages/astro/src/astro-components/**/*.ts',
+      'packages/shared/src/compiled/path-to-regexp/index.js',
     ],
   },
   {
@@ -111,6 +111,7 @@ export default tseslint.config([
       '@typescript-eslint/no-redundant-type-constituents': 'warn',
       '@typescript-eslint/no-unsafe-enum-comparison': 'warn',
       '@typescript-eslint/no-unnecessary-type-assertion': 'warn',
+      '@typescript-eslint/prefer-promise-reject-errors': 'warn',
       '@typescript-eslint/require-await': 'warn',
       '@typescript-eslint/no-unused-vars': [
         'error',
