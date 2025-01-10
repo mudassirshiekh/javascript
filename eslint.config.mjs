@@ -1,5 +1,6 @@
 import eslint from '@eslint/js';
-import pluginTurbo from 'eslint-config-turbo/flat';
+import configPrettier from 'eslint-config-prettier';
+import configTurbo from 'eslint-config-turbo/flat';
 import pluginImport from 'eslint-plugin-import';
 import pluginJest from 'eslint-plugin-jest';
 import pluginSimpleImportSort from 'eslint-plugin-simple-import-sort';
@@ -53,9 +54,14 @@ export default tseslint.config([
       sourceType: 'module',
     },
   },
+  {
+    linterOptions: {
+      reportUnusedDisableDirectives: 'error',
+    },
+  },
   eslint.configs.recommended,
   tseslint.configs.recommendedTypeChecked,
-  ...pluginTurbo,
+  ...configTurbo,
   {
     // extends: [pluginImport.configs.recommended],
   },
@@ -226,4 +232,5 @@ export default tseslint.config([
       ],
     },
   },
+  configPrettier,
 ]);
