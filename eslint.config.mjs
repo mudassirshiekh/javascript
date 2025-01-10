@@ -3,6 +3,7 @@ import configPrettier from 'eslint-config-prettier';
 import configTurbo from 'eslint-config-turbo/flat';
 import pluginImport from 'eslint-plugin-import';
 import pluginJest from 'eslint-plugin-jest';
+import * as pluginRegexp from 'eslint-plugin-regexp';
 import pluginSimpleImportSort from 'eslint-plugin-simple-import-sort';
 import pluginUnusedImports from 'eslint-plugin-unused-imports';
 import globals from 'globals';
@@ -11,12 +12,12 @@ import tseslint from 'typescript-eslint';
 const ECMA_VERSION = 2021,
   JAVASCRIPT_FILES = ['**/*.cjs', '**/*.js', '**/*.jsx', '**/*.mjs'],
   TEST_FILES = ['**/*.test.js', '**/*.test.jsx', '**/*.test.ts', '**/*.test.tsx', '**/test/**', '**/__tests__/**'],
-  TYPESCRIPT_FILES = ['**/*.cts', '**/*.mts', '**/*.ts', '**/*.tsx'],
-  YAML_FILES = ['**/*.yml', '**/*.yaml'];
+  TYPESCRIPT_FILES = ['**/*.cts', '**/*.mts', '**/*.ts', '**/*.tsx'];
 
 export default tseslint.config([
   {
     ignores: [
+      '!github',
       '.cache',
       '.idea',
       '.next',
@@ -61,6 +62,7 @@ export default tseslint.config([
   },
   eslint.configs.recommended,
   tseslint.configs.recommendedTypeChecked,
+  pluginRegexp.configs['flat/recommended'],
   ...configTurbo,
   {
     // extends: [pluginImport.configs.recommended],
@@ -201,10 +203,6 @@ export default tseslint.config([
     rules: {
       'no-unused-vars': 'off',
     },
-  },
-  {
-    files: ['packages/astro/'],
-    rules: {},
   },
   // TEST FILE RULES
   {
