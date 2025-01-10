@@ -186,7 +186,7 @@ describe('useDerivedAuth', () => {
     } = renderHook(() => useDerivedAuth(authObject));
 
     if (!current.userId) {
-      throw 'Invalid state';
+      throw new Error('Invalid state');
     }
 
     const result = current.has({ permission: 'test' });
