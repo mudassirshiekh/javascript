@@ -203,6 +203,9 @@ export default tseslint.config([
   // TEST FILE RULES
   {
     files: TEST_FILES,
+    languageOptions: {
+      globals: pluginJest.environments.globals.globals,
+    },
     plugins: {
       jest: pluginJest,
     },
