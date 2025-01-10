@@ -1,6 +1,7 @@
 import eslint from '@eslint/js';
 import pluginTurbo from 'eslint-config-turbo/flat';
 import pluginImport from 'eslint-plugin-import';
+import pluginJest from 'eslint-plugin-jest';
 import pluginSimpleImportSort from 'eslint-plugin-simple-import-sort';
 import pluginUnusedImports from 'eslint-plugin-unused-imports';
 import globals from 'globals';
@@ -198,5 +199,16 @@ export default tseslint.config([
   {
     files: ['packages/astro/'],
     rules: {},
+  },
+  // TEST FILE RULES
+  {
+    files: TEST_FILES,
+    plugins: {
+      jest: pluginJest,
+    },
+    rules: {
+      '@typescript-eslint/unbound-method': 'off',
+      'jest/unbound-method': 'error',
+    },
   },
 ]);
