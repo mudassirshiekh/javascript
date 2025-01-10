@@ -211,4 +211,16 @@ export default tseslint.config([
       'jest/unbound-method': 'error',
     },
   },
+  // @clerk/expo-passkeys
+  {
+    files: ['packages/expo-passkeys/src/**/*'],
+    rules: {
+      'no-restricted-imports': [
+        'error',
+        {
+          patterns: ['node:*'],
+        },
+      ],
+    },
+  },
 ]);
