@@ -14,7 +14,6 @@
   "license": "MIT",
   "author": "Clerk",
   "dependencies": {
-    "@vercel/style-guide": "6.0.0",
     "any-eslint-parser": "^1.0.1",
     "eslint-config-prettier": "9.1.0",
     "eslint-plugin-playwright": "2.1.0",

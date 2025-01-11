@@ -1,3 +1,4 @@
+// eslint-disable-next-line import/namespace
 import { Platform } from 'react-native';
 
 import type {

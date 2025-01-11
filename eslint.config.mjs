@@ -38,6 +38,7 @@ export default tseslint.config([
       'vitest.workspace.mjs',
       // package specific ignores
       'packages/astro/src/astro-components/**/*.ts',
+      'packages/backend/src/runtime/**/*',
       'packages/shared/src/compiled/path-to-regexp/index.js',
     ],
   },
@@ -97,6 +98,8 @@ export default tseslint.config([
           ],
         },
       ],
+
+      'import/no-unresolved': ['error', { ignore: ['^#'] }],
 
       'simple-import-sort/imports': 'error',
 

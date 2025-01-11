@@ -170,7 +170,6 @@ describe('useDerivedAuth', () => {
     };
     renderHook(() => useDerivedAuth(authObject));
 
-    // eslint-disable-next-line @typescript-eslint/unbound-method
     expect(errorThrower.throw).toHaveBeenCalledWith(invalidStateError);
   });
 
