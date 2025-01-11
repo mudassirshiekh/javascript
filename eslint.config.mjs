@@ -64,13 +64,10 @@ export default tseslint.config([
   tseslint.configs.recommendedTypeChecked,
   pluginRegexp.configs['flat/recommended'],
   ...configTurbo,
-  {
-    // extends: [pluginImport.configs.recommended],
-  },
+  pluginImport.flatConfigs.recommended,
   // GLOBAL RULES
   {
     plugins: {
-      import: pluginImport,
       'simple-import-sort': pluginSimpleImportSort,
       'unused-imports': pluginUnusedImports,
     },
@@ -200,6 +197,7 @@ export default tseslint.config([
   // TYPESCRIPT RULES
   {
     files: TYPESCRIPT_FILES,
+    extends: [pluginImport.flatConfigs.recommended, pluginImport.flatConfigs.typescript],
     rules: {
       'no-unused-vars': 'off',
     },
