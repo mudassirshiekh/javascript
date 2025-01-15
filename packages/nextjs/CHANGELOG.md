@@ -1,5 +1,17 @@
 # Change Log
 
+## 6.9.11
+
+### Patch Changes
+
+- Handle `dynamicIO` errors when request apis are accessed on prerender. This fixes issues with `ppr: true, dynamicIO: true` when using `<ClerkProvider dynamic/>`. ([#4836](https://github.com/clerk/javascript/pull/4836)) by [@panteliselef](https://github.com/panteliselef)
+
+- Updated dependencies [[`fd7a5be73db3acaa7daeb9b15af73c2ce99d03a6`](https://github.com/clerk/javascript/commit/fd7a5be73db3acaa7daeb9b15af73c2ce99d03a6), [`7182b93101518a389cc13859f8a0fe8bd6f37a06`](https://github.com/clerk/javascript/commit/7182b93101518a389cc13859f8a0fe8bd6f37a06)]:
+  - @clerk/types@4.40.3
+  - @clerk/backend@1.22.1
+  - @clerk/clerk-react@5.21.3
+  - @clerk/shared@2.20.7
+
 ## 6.9.10
 
 ### Patch Changes
