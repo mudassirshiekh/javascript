@@ -31,7 +31,7 @@ Would you like to work on Open Source software and help maintain this repository
 ---
 
 ## 🚀 Get Started with Clerk
-
+## By Mudassir Alam
 1. [Sign up for an account](https://dashboard.clerk.com/sign-up?utm_source=github&utm_medium=clerk_js_repo_readme)
 1. Create an application in your Clerk dashboard
 1. Spin up a new codebase with one of the [quickstart guides](https://clerk.com/docs/quickstarts/overview?utm_source=github&utm_medium=clerk_js_repo_readme)
